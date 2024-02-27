@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Exemples d&apos;Attaques par Injection SQL</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <p>La sécurité des applications web est une préoccupation majeure pour les développeurs, en particulier en ce qui concerne la prévention des injections SQL, une technique d'attaque où des intrus exploitent des vulnérabilités dans l'interaction d'une application avec sa base de données. Ces attaques peuvent avoir des conséquences désastreuses, allant de la suppression de données à la fuite d'informations confidentielles. Voici une synthèse organisée des exemples d'injections SQL fournis précédemment, démontrant diverses façons dont ces attaques peuvent être menées et comment les prévenir.</p>
+<h3 id="exemples-dattaques-par-injection-sql">Exemples d'Attaques par Injection SQL</h3>
+<ol>
+<li><strong>Suppression de Données</strong> :
+<ul>
+<li>Via un formulaire d'inscription, un attaquant injecte <code>', ''); DROP TABLE article; --</code>, causant la suppression de la table <code>article</code> et la perte de tous les articles.</li>
+</ul>
+</li>
+</ol>
+<pre><code class="language-sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> utilisateur (nom, mot_de_passe) <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&#x27;nom_utilisateur&#x27;</span>, <span class="hljs-string">&#x27;mot_de_passe&#x27;</span>);
+</code></pre>
+<p>Un attaquant pourrait soumettre un nom d'utilisateur spécialement conçu pour exécuter une injection SQL. Si l'application insère directement les valeurs soumises sans les échapper ou les valider, l'attaquant pourrait utiliser la saisie suivante :</p>
+<pre><code>nom_utilisateur', ''); DROP TABLE article; --
+</code></pre>
+<p>En insérant cette entrée dans le formulaire, la requête SQL finale exécutée par le serveur pourrait ressembler à cela :</p>
+<pre><code class="language-sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> utilisateur (nom, mot_de_passe) <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&#x27;nom_utilisateur&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>); <span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span> article; <span class="hljs-comment">--&#x27;, &#x27;mot_de_passe&#x27;);</span>
+</code></pre>
+<ol start="2">
+<li><strong>By-pass d'Authentification</strong> :
+<ul>
+<li>Un attaquant soumet <code>' OR '1'='1</code> dans un champ de nom d'utilisateur, modifiant la logique de la requête SQL pour se connecter sans mot de passe valide.</li>
+</ul>
+</li>
+</ol>
+<p>Imaginons une page de connexion où l'utilisateur soumet un nom d'utilisateur et un mot de passe, qui sont insérés dans une requête SQL directement sans validation ni utilisation de requêtes préparées. Un attaquant pourrait entrer une valeur spéciale dans le champ du nom d'utilisateur pour by-passer l'authentification :</p>
+<pre><code class="language-sql"><span class="hljs-string">&#x27; OR &#x27;</span><span class="hljs-number">1</span><span class="hljs-string">&#x27;=&#x27;</span><span class="hljs-number">1</span>
+</code></pre>
+<p>Si l'application construit la requête SQL comme suit :</p>
+<pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> utilisateur <span class="hljs-keyword">WHERE</span> nom <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;entrée_utilisateur&#x27;</span> <span class="hljs-keyword">AND</span> mot_de_passe <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;entrée_mot_de_passe&#x27;</span>;
+</code></pre>
+<p>En remplaçant <code>entrée_utilisateur</code> par l'injection ci-dessus, la requête deviendrait :</p>
+<pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> utilisateur <span class="hljs-keyword">WHERE</span> nom <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-keyword">OR</span> <span class="hljs-string">&#x27;1&#x27;</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;1&#x27;</span> <span class="hljs-keyword">AND</span> mot_de_passe <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;entrée_mot_de_passe&#x27;</span>;
+</code></pre>
+<p>Cette condition sera toujours vraie (<code>'1'='1'</code>), permettant potentiellement à un attaquant d'accéder sans connaître un mot de passe valide.</p>
+<ol start="3">
+<li>
+<p><strong>Modification de Données</strong> :</p>
+<ul>
+<li>Injection dans un champ d'adresse e-mail: <code>', mot_de_passe = 'piraté' WHERE id = '1' OR '1'='1</code>, permettant à un attaquant de changer les mots de passe de tous les utilisateurs.</li>
+</ul>
+<p>Supposons qu'il existe une fonctionnalité permettant à un utilisateur de mettre à jour son profil, y compris son adresse e-mail. Un attaquant pourrait injecter une requête SQL dans le champ de l'adresse e-mail pour modifier non seulement son adresse mais aussi celle d'autres utilisateurs :</p>
+</li>
+</ol>
+<pre><code class="language-sql"><span class="hljs-string">&#x27;, mot_de_passe = &#x27;</span>piraté<span class="hljs-string">&#x27; WHERE id = &#x27;</span><span class="hljs-number">1</span><span class="hljs-string">&#x27; OR &#x27;</span><span class="hljs-number">1</span><span class="hljs-string">&#x27;=&#x27;</span><span class="hljs-number">1</span>
+</code></pre>
+<p>Si cette entrée est insérée dans une requête non sécurisée, cela pourrait potentiellement réinitialiser les mots de passe de tous les comptes.</p>
+<ol start="4">
+<li>
+<p><strong>Extraction d'Informations</strong> :</p>
+<ul>
+<li>Modification d'un paramètre d'URL en <code>1 UNION SELECT nom, mot_de_passe FROM utilisateur</code>, exposant les noms et mots de passe des utilisateurs.</li>
+</ul>
+<p>Un attaquant peut exploiter une injection SQL pour extraire des informations sensibles de la base de données. Par exemple, si un site affiche des articles basés sur un paramètre d'URL, un attaquant pourrait modifier l'URL pour exécuter une requête qui révèle des informations sensibles :</p>
+</li>
+</ol>
+<pre><code class="language-sql"><span class="hljs-number">1</span> <span class="hljs-keyword">UNION</span> <span class="hljs-keyword">SELECT</span> nom, mot_de_passe <span class="hljs-keyword">FROM</span> utilisateur
+</code></pre>
+<p>Si le paramètre est directement inséré dans une requête SQL, cela pourrait amener l'application à afficher les noms et mots de passe de tous les utilisateurs.</p>
+<h3 id="prévention-des-injections-sql">Prévention des Injections SQL</h3>
+<p>Pour contrer ces vulnérabilités, il est essentiel d'adopter des pratiques de codage sécurisées :</p>
+<ul>
+<li><strong>Utiliser des Requêtes Préparées</strong> : Elles séparent le code SQL de la donnée, empêchant l'interprétation des entrées utilisateur comme du code SQL.</li>
+<li><strong>Employer des ORM (Object Relational Mapping)</strong> : Les ORM aident à générer du code SQL sécurisé automatiquement, réduisant le risque d'injection.</li>
+<li><strong>Valider et Nettoyer les Entrées Utilisateur</strong> : S'assurer que toutes les entrées correspondent aux attentes en termes de type et de format avant de les traiter.</li>
+<li><strong>Utiliser des Comptes de Base de Données à Privilèges Limités</strong> : En limitant les actions que peut effectuer l'utilisateur de la base de données, on réduit l'impact potentiel d'une injection réussie.</li>
+</ul>
+<p>Ces stratégies forment un bouclier contre les injections SQL, protégeant ainsi les applications web des intrusions malveillantes. Il est crucial que les développeurs soient formés à ces pratiques pour sécuriser efficacement leurs applications dès la conception.</p>
+
+            
+            
+        </body>
+        </html>
