@@ -1,0 +1,165 @@
+/* Réinitialisation de certains styles par défaut */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* Styles de base */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    font-size: 16px;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 20px;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding-top: 30px;
+    min-height: 70px;
+    border-bottom: 3px solid #0779e4;
+}
+
+header h1 {
+    text-align: center;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    background: #444;
+    padding: 10px 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+    background-color: #5D5D5D;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: #0779e4;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+form label {
+    flex-basis: 100%;
+    margin-bottom: 10px;
+}
+
+form input[type="email"],
+form input[type="password"],
+form input[type="submit"] {
+    flex: 1;
+    margin: 5px 0;
+    padding: 10px;
+}
+
+form input[type="submit"] {
+    background-color: #0779e4;
+    color: white;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+div {
+    margin-bottom: 20px;
+}
+
+a {
+    color: #0779e4;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+/* Styles spécifiques pour le formulaire d'édition d'article */
+.form-article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-article .form-group {
+    width: 100%; /* Assure que chaque groupe de formulaire prend toute la largeur */
+    margin-bottom: 20px; /* Espacement entre les groupes de formulaires */
+}
+
+.form-article .form-group input[type="text"],
+.form-article .form-group textarea {
+    width: 100%; /* Utilise toute la largeur du groupe de formulaire */
+    padding: 10px; /* Confort de saisie */
+    box-sizing: border-box; /* Inclut padding et border dans la largeur définie */
+}
+
+.form-article .form-group textarea {
+    height: 200px; /* Hauteur spécifique pour le textarea, ajustez selon besoin */
+}
+
+.form-article input[type="submit"] {
+    padding: 10px 50px; /* Ajustez le padding pour contrôler la taille du bouton */
+    margin-top: 20px; /* Espacement au-dessus du bouton */
+}
+
+/* Utilisation des styles existants pour une intégration harmonieuse */
+.form-article input[type="submit"] {
+    background-color: #0779e4; /* Couleur de fond du bouton, issue de votre CSS */
+    color: white; /* Couleur du texte */
+    cursor: pointer; /* Curseur de pointeur pour indiquer la cliquabilité */
+}
+
+.form-article input[type="submit"]:hover {
+    background-color: #0056b3; /* Effet au survol, pour cohérence avec votre style */
+}
+

