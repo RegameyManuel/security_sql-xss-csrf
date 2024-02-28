@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>&DiacriticalGrave;mysql&DiacriticalGrave;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <p>Les bases de données <code>'mysql'</code>, <code>'information_schema'</code>, <code>'sys'</code>, et <code>'performance_schema'</code> jouent des rôles cruciaux dans MySQL et MariaDB, fournissant des informations sur la structure, la performance, et la sécurité de votre système de base de données. Voici une présentation de chaque base de données et leur utilité potentielle dans un cadre de cybersécurité :</p>
+<h3 id="mysql"><code>mysql</code></h3>
+<p>La base de données <code>mysql</code> contient des informations essentielles sur les privilèges des utilisateurs, les comptes, et d'autres méta-données de sécurité. Elle est fondamentale pour gérer l'authentification et l'autorisation des utilisateurs.</p>
+<ul>
+<li><strong>Cybersécurité</strong> : En examinant les privilèges des utilisateurs dans cette base de données, vous pouvez identifier les comptes ayant des accès excessifs et potentiellement dangereux. Réviser régulièrement ces privilèges permet de minimiser les risques de failles de sécurité en appliquant le principe du moindre privilège.</li>
+</ul>
+<h3 id="information_schema"><code>information_schema</code></h3>
+<p>La base de données <code>information_schema</code> fournit une vue en lecture seule de la structure de toutes les bases de données dans le système, incluant les tables, colonnes, schémas, et bien plus.</p>
+<ul>
+<li><strong>Cybersécurité</strong> : Elle peut être utilisée pour effectuer des audits de structure et s'assurer que les configurations de la base de données correspondent aux meilleures pratiques de sécurité. Par exemple, vérifier que les données sensibles sont correctement typées et stockées.</li>
+</ul>
+<h3 id="sys"><code>sys</code></h3>
+<p>La base de données <code>sys</code> est une collection de vues, fonctions, et procédures stockées qui aident à interpréter les données de performance collectées par la base de données <code>performance_schema</code>. Elle simplifie l'analyse des performances et la détection de problèmes.</p>
+<ul>
+<li><strong>Cybersécurité</strong> : Bien qu'elle soit principalement orientée vers la performance, <code>sys</code> peut aider à identifier des comportements anormaux ou des requêtes inhabituelles qui pourraient indiquer une tentative d'intrusion ou une mauvaise configuration affectant la sécurité.</li>
+</ul>
+<h3 id="performance_schema"><code>performance_schema</code></h3>
+<p>La base de données <code>performance_schema</code> collecte et fournit des informations détaillées sur la performance du serveur de base de données, y compris des statistiques sur les requêtes, les threads, les événements, et plus.</p>
+<ul>
+<li><strong>Cybersécurité</strong> : <code>performance_schema</code> permet de surveiller les performances en temps réel et d'identifier les anomalies ou les changements de comportement dans l'utilisation de la base de données, qui peuvent être des signes d'activités malveillantes. Analyser ces informations peut aider à détecter des tentatives de SQL Injection, des accès non autorisés, ou des exfiltrations de données.</li>
+</ul>
+<p>Dans un cadre de cybersécurité, l'accès et l'analyse de ces bases de données permettent d'effectuer des audits de sécurité complets, d'identifier les configurations à risque, de surveiller les performances pour détecter les comportements suspects, et de gérer efficacement les privilèges des utilisateurs. Il est essentiel de les protéger et de limiter strictement l'accès à ces bases de données pour prévenir les abus et les fuites d'informations sensibles.</p>
+<ol>
+<li>
+<p><strong>Voir la structure (noms des colonnes et types de données) de toutes vos tables personnalisées ou tierces, sans inclure les détails des tables internes utilisées par le système de gestion de base de données lui-même.</strong> :</p>
+<pre><code class="language-sql"> <span class="hljs-keyword">SELECT</span> TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME, DATA_TYPE 
+ <span class="hljs-keyword">FROM</span> information_schema.COLUMNS 
+ <span class="hljs-keyword">WHERE</span> TABLE_SCHEMA <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">IN</span> (<span class="hljs-string">&#x27;mysql&#x27;</span>, <span class="hljs-string">&#x27;information_schema&#x27;</span>, <span class="hljs-string">&#x27;sys&#x27;</span>, <span class="hljs-string">&#x27;performance_schema&#x27;</span>);
+</code></pre>
+<p>Cette requête SQL récupère et affiche des informations sur les colonnes des tables présentes dans votre base de données MySQL ou MariaDB, à l'exception de celles   appartenant aux bases de données système comme <code>mysql</code>, <code>information_schema</code>, <code>sys</code>, et <code>performance_schema</code>. Plus précisément, elle liste le nom de la base de données   (<code>TABLE_SCHEMA</code>), le nom de la table (<code>TABLE_NAME</code>), le nom de la colonne (<code>COLUMN_NAME</code>), et le type de données de chaque colonne (<code>DATA_TYPE</code>), mais seulement pour     les bases de données créées par l'utilisateur ou tierces, en excluant les bases de données internes utilisées par MySQL/MariaDB pour sa gestion interne.</p>
+<p>En d'autres termes, cette requête vous permet de voir la structure (noms des colonnes et types de données) de toutes vos tables personnalisées ou tierces, sans inclure     les détails des tables internes utilisées par le système de gestion de base de données lui-même.</p>
+</li>
+<li>
+<p><strong>Lister toutes les tables (sans détail des colonnes) hors des bases de données système</strong> :</p>
+<pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> TABLE_SCHEMA, TABLE_NAME 
+<span class="hljs-keyword">FROM</span> information_schema.TABLES 
+<span class="hljs-keyword">WHERE</span> TABLE_SCHEMA <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">IN</span> (<span class="hljs-string">&#x27;mysql&#x27;</span>, <span class="hljs-string">&#x27;information_schema&#x27;</span>, <span class="hljs-string">&#x27;sys&#x27;</span>, <span class="hljs-string">&#x27;performance_schema&#x27;</span>);
+</code></pre>
+<p>Cette requête est plus simple si vous voulez seulement connaître les noms des tables et de quelles bases de données elles viennent, sans entrer dans le détail des colonnes.</p>
+</li>
+<li>
+<p><strong>Obtenir des informations détaillées sur les contraintes de clé étrangère</strong> :</p>
+<pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME, REFERENCED_TABLE_SCHEMA, REFERENCED_TABLE_NAME, REFERENCED_COLUMN_NAME
+<span class="hljs-keyword">FROM</span> information_schema.KEY_COLUMN_USAGE
+<span class="hljs-keyword">WHERE</span> REFERENCED_TABLE_SCHEMA <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>
+  <span class="hljs-keyword">AND</span> TABLE_SCHEMA <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">IN</span> (<span class="hljs-string">&#x27;mysql&#x27;</span>, <span class="hljs-string">&#x27;information_schema&#x27;</span>, <span class="hljs-string">&#x27;sys&#x27;</span>, <span class="hljs-string">&#x27;performance_schema&#x27;</span>);
+</code></pre>
+<p>Cette alternative serait utile si vous êtes intéressé par la façon dont les tables sont liées entre elles plutôt que par la structure détaillée des colonnes.</p>
+</li>
+<li>
+<p><strong>Filtrer pour une base de données spécifique</strong> :</p>
+<p>Si vous êtes intéressé par une base de données spécifique (par exemple, <code>ma_base_de_donnees</code>), vous pourriez simplifier ou modifier la requête pour cibler uniquement cette base :</p>
+<pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> TABLE_NAME, COLUMN_NAME, DATA_TYPE 
+<span class="hljs-keyword">FROM</span> information_schema.COLUMNS 
+<span class="hljs-keyword">WHERE</span> TABLE_SCHEMA <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;ma_base_de_donnees&#x27;</span>;
+</code></pre>
+<p>Cette version se concentre uniquement sur la structure d'une base de données que vous choisissez, ce qui pourrait être plus pertinent pour des cas d'utilisation spécifiques.</p>
+</li>
+</ol>
+<h3 id="lister-tous-les-utilisateurs-et-leurs-droits">Lister Tous les Utilisateurs et Leurs Droits</h3>
+<p>Pour lister tous les utilisateurs et leurs droits, vous pouvez interroger la table <code>mysql.user</code>. Cette table contient des informations sur tous les utilisateurs et leurs privilèges au niveau global. Pour une vue simplifiée des utilisateurs et de leurs privilèges principaux :</p>
+<pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">User</span>, Host, Select_priv, Insert_priv, Update_priv, Delete_priv, Execute_priv, Grant_priv 
+<span class="hljs-keyword">FROM</span> mysql.user;
+</code></pre>
+<p>Cette requête vous donnera une liste des utilisateurs et un aperçu de leurs privilèges principaux (sélection, insertion, mise à jour, suppression, exécution, droit de donner des privilèges).</p>
+<h3 id="lister-les-procédures-stockées-et-les-triggers">Lister les Procédures Stockées et les Triggers</h3>
+<p>Pour lister les procédures stockées et les triggers, vous pouvez utiliser les tables <code>information_schema.ROUTINES</code> pour les procédures et fonctions, et <code>information_schema.TRIGGERS</code> pour les triggers.</p>
+<ul>
+<li>
+<p><strong>Procédures stockées et fonctions</strong> :</p>
+<pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> ROUTINE_SCHEMA, ROUTINE_NAME, ROUTINE_TYPE
+<span class="hljs-keyword">FROM</span> information_schema.ROUTINES
+<span class="hljs-keyword">WHERE</span> ROUTINE_SCHEMA <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">IN</span> (<span class="hljs-string">&#x27;mysql&#x27;</span>, <span class="hljs-string">&#x27;information_schema&#x27;</span>, <span class="hljs-string">&#x27;sys&#x27;</span>, <span class="hljs-string">&#x27;performance_schema&#x27;</span>);
+</code></pre>
+<p>Cette requête liste les noms et les types (PROCEDURE ou FUNCTION) des routines (procédures stockées et fonctions), en excluant les bases de données système.</p>
+</li>
+<li>
+<p><strong>Triggers</strong> :</p>
+<pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> TRIGGER_SCHEMA, TRIGGER_NAME, EVENT_OBJECT_TABLE, ACTION_TIMING, EVENT_MANIPULATION
+<span class="hljs-keyword">FROM</span> information_schema.TRIGGERS
+<span class="hljs-keyword">WHERE</span> TRIGGER_SCHEMA <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">IN</span> (<span class="hljs-string">&#x27;mysql&#x27;</span>, <span class="hljs-string">&#x27;information_schema&#x27;</span>, <span class="hljs-string">&#x27;sys&#x27;</span>, <span class="hljs-string">&#x27;performance_schema&#x27;</span>);
+</code></pre>
+<p>Cette requête fournit des détails sur les triggers, y compris le schéma dans lequel ils se trouvent, le nom du trigger, la table sur laquelle ils opèrent, quand ils s'activent (<code>BEFORE</code> ou <code>AFTER</code>), et le type d'événement qui les déclenche (<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>).</p>
+</li>
+</ul>
+
+            
+            
+        </body>
+        </html>

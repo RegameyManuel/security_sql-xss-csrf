@@ -59,3 +59,29 @@ INSERT INTO article (titre, contenu, id_utilisateur, id_categorie) VALUES
 ('Découvrir le monde en 10 étapes', 'Contenu de l''article sur le voyage...', 1, 2),
 ('Votre routine sportive pour l''été', 'Contenu de l''article sur le sport...', 2, 4);
 
+
+-- Définition des procédures stockées
+DELIMITER //
+
+CREATE PROCEDURE AjouterArticle(IN titre VARCHAR(255), IN contenu TEXT, IN userId INT, IN catId INT)
+BEGIN
+    INSERT INTO article (titre, contenu, id_utilisateur, id_categorie) VALUES (titre, contenu, userId, catId);
+END //
+
+CREATE PROCEDURE LireArticles()
+BEGIN
+    SELECT * FROM article;
+END //
+
+CREATE PROCEDURE MettreAJourArticle(IN artId INT, IN newTitre VARCHAR(255), IN newContenu TEXT)
+BEGIN
+    UPDATE article SET titre = newTitre, contenu = newContenu WHERE id = artId;
+END //
+
+CREATE PROCEDURE SupprimerArticle(IN artId INT)
+BEGIN
+    DELETE FROM article WHERE id = artId;
+END //
+
+DELIMITER ;
+
